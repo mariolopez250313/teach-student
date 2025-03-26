@@ -33,3 +33,16 @@ def registrar_usuario():
     guardar_datos(datos)
     print(f"✅ {rol.capitalize()} registrado con éxito.")
 
+# Inicio de sesion
+def login():
+    datos = cargar_datos()
+    usuario = input("Usuario: ")
+    contraseña = input("Contraseña: ")
+
+    if usuario in datos["usuarios"] and datos["usuarios"][usuario]["contraseña"] == contraseña:
+        print(f"✅ Bienvenido, {usuario} ({datos['usuarios'][usuario]['rol']})")
+        return usuario, datos["usuarios"][usuario]["rol"]
+    else:
+        print("❌ Usuario o contraseña incorrectos.")
+        return None, None
+
