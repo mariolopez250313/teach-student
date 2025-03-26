@@ -97,3 +97,23 @@ def menu_profesor(usuario):
         else:
             print("❌ Opción inválida.")
 
+#Menu estudiante
+def menu_estudiante(usuario):
+    datos = cargar_datos()
+    while True:
+        print("\n--- MENÚ ESTUDIANTE ---")
+        print("1. Consultar notas")
+        print("2. Salir")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            if "cursos" in datos["usuarios"][usuario]:
+                for curso, nota in datos["usuarios"][usuario]["cursos"].items():
+                    print(f"{curso}: {nota}")
+            else:
+                print("❌ No tiene notas registradas.")
+        elif opcion == "2":
+            break
+        else:
+            print("❌ Opción inválida.")
+
