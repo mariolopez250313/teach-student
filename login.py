@@ -68,3 +68,52 @@ def menu_administrador():
         else:
             print("❌ Opción inválida.")
 
+#Menu profesor
+def menu_profesor(usuario):
+    datos = cargar_datos()
+    while True:
+        print("\n--- MENÚ PROFESOR ---")
+        print("1. Ver cursos")
+        print("2. Registrar notas")
+        print("3. Salir")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            print("Cursos disponibles:")
+            for curso in datos["cursos"]:
+                print(f"- {curso}")
+        elif opcion == "2":
+            curso = input("Ingrese el nombre del curso: ")
+            if curso in datos["cursos"]:
+                estudiante = input("Ingrese el nombre del estudiante: ")
+                nota = input("Ingrese la nota: ")
+                datos["usuarios"].setdefault(estudiante, {}).setdefault("cursos", {})[curso] = nota
+                guardar_datos(datos)
+                print(f"✅ Nota registrada para {estudiante}.")
+            else:
+                print("❌ Curso no encontrado.")
+        elif opcion == "3":
+            break
+        else:
+            print("❌ Opción inválida.")
+
+#Menu estudiante
+def menu_estudiante(usuario):
+    datos = cargar_datos()
+    while True:
+        print("\n--- MENÚ ESTUDIANTE ---")
+        print("1. Consultar notas")
+        print("2. Salir")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            if "cursos" in datos["usuarios"][usuario]:
+                for curso, nota in datos["usuarios"][usuario]["cursos"].items():
+                    print(f"{curso}: {nota}")
+            else:
+                print("❌ No tiene notas registradas.")
+        elif opcion == "2":
+            break
+        else:
+            print("❌ Opción inválida.")
+
