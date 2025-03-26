@@ -15,3 +15,21 @@ def guardar_datos(datos):
     with open(DATA_FILE, "wb") as f:
         pickle.dump(datos, f)
 
+#registro de usuarios
+def registrar_usuario():
+    datos = cargar_datos()
+    usuario = input("Ingrese un nombre de usuario: ")
+    if usuario in datos["usuarios"]:
+        print("❌ El usuario ya existe.")
+        return
+    contraseña = input("Ingrese una contraseña: ")
+    rol = input("Ingrese el rol (administrador, profesor, estudiante): ").lower()
+    
+    if rol not in ["administrador", "profesor", "estudiante"]:
+        print("❌ Rol inválido.")
+        return
+    
+    datos["usuarios"][usuario] = {"contraseña": contraseña, "rol": rol, "cursos": {}}
+    guardar_datos(datos)
+    print(f"✅ {rol.capitalize()} registrado con éxito.")
+
