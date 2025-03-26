@@ -117,3 +117,27 @@ def menu_estudiante(usuario):
         else:
             print("❌ Opción inválida.")
 
+#Menu ppal
+def menu_principal():
+    while True:
+        print("\n--- SISTEMA ESCOLAR ---")
+        print("1. Registrar usuario")
+        print("2. Iniciar sesión")
+        print("3. Salir")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            registrar_usuario()
+        elif opcion == "2":
+            usuario, rol = login()
+            if usuario:
+                if rol == "administrador":
+                    menu_administrador()
+                elif rol == "profesor":
+                    menu_profesor(usuario)
+                elif rol == "estudiante":
+                    menu_estudiante(usuario)
+        elif opcion == "3":
+            break
+        else:
+            print("❌ Opción inválida.")
