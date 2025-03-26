@@ -46,3 +46,25 @@ def login():
         print("❌ Usuario o contraseña incorrectos.")
         return None, None
 
+#Menu admin
+def menu_administrador():
+    datos = cargar_datos()
+    while True:
+        print("\n--- MENÚ ADMINISTRADOR ---")
+        print("1. Crear curso")
+        print("2. Salir")
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == "1":
+            nombre_curso = input("Ingrese el nombre del curso: ")
+            if nombre_curso in datos["cursos"]:
+                print("❌ El curso ya existe.")
+            else:
+                datos["cursos"][nombre_curso] = {}
+                guardar_datos(datos)
+                print(f"✅ Curso '{nombre_curso}' creado con éxito.")
+        elif opcion == "2":
+            break
+        else:
+            print("❌ Opción inválida.")
+
